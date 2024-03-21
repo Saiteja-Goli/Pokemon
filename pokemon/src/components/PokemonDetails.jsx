@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Center, Flex, VStack, Heading, Text, Image, Stack, Divider, Button, ButtonGroup, CardFooter, Card, CardBody, Wrap, WrapItem, Tag } from '@chakra-ui/react';
+import { Box, Center, Heading, Text, Image, Stack,Card, CardBody, Wrap, WrapItem, Tag } from '@chakra-ui/react';
 
 const PokemonDetails = () => {
     const { id } = useParams();
@@ -57,7 +57,6 @@ const PokemonDetails = () => {
                             </Stack>
                         </Stack>
                     </CardBody>
-                    <Divider />
                 </Card>
             </Center>
 
