@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Center,Flex, VStack, Heading, Text, Image, Stack, Divider, Button, ButtonGroup, CardFooter, Card, CardBody } from '@chakra-ui/react';
+import { Box, Center, Flex, VStack, Heading, Text, Image, Stack, Divider, Button, ButtonGroup, CardFooter, Card, CardBody, Wrap, WrapItem, Tag } from '@chakra-ui/react';
 
 const PokemonDetails = () => {
     const { id } = useParams();
@@ -27,49 +27,41 @@ const PokemonDetails = () => {
     return (
         (
             <Center>
-                <Box>
-                    <Flex>
-                        {/* Left side with the image */}
-                        <Box mr={8}>
-                            <Image src={pokemonDetails.sprites.front_default} alt={pokemonDetails.name} borderRadius='lg' />
-                        </Box>
-                        {/* Right side with the information */}
-                        <Stack spacing='3'>
-                            <Heading size="lg">{pokemonDetails.name}</Heading>
-                            <Text color='blue.600' fontSize='2xl'>
-                                {/* Displaying weight */}
-                                Weight: {pokemonDetails.weight}
-                            </Text>
-                            <Text color='blue.600'>
-                                {/* Displaying base experience */}
-                                Base Experience: {pokemonDetails.base_experience}
-                            </Text>
-                            {/* Displaying types */}
-                            <Text color='blue.600'>
-                                Types:
-                                {pokemonDetails.types.map((type, index) => (
-                                    <Text key={index}>{type.type.name}</Text>
-                                ))}
-                            </Text>
-                            {/* Displaying abilities */}
-                            <Text color='blue.600'>
-                                Abilities:
-                                {pokemonDetails.abilities.map((ability, index) => (
-                                    <Text key={index}>{ability.ability.name}</Text>
-                                ))}
-                            </Text>
-                            {/* Displaying stats */}
-                            <Text color='blue.600'>
-                                Stats:
+                <Card width={"25%"} mt={'20px'}>
+                    <CardBody>
+                        <Center>
+                            <Image src={pokemonDetails.sprites.front_default} alt={pokemonDetails.name} borderRadius='lg' w='60%' />
+                        </Center>
+                        <Stack mt='6' spacing='3'>
+                            <Heading size='md'>{pokemonDetails.name}</Heading>
+                            <Text color='blue.600'>Weight: {pokemonDetails.weight}</Text>
+                            <Text color='blue.600'>Base Experience: {pokemonDetails.base_experience}</Text>
+                            <Box display="inline-block">
+                                <Text color='blue.600' display="inline-block">Types : {"  "}</Text>{"  "}
+                                <Wrap spacing="2" display="inline-block">
+                                    {pokemonDetails.types.map((type, index) => (
+                                        <WrapItem key={index}>
+                                            <Tag colorScheme="blue">{type.type.name}</Tag>
+                                        </WrapItem>
+                                    ))}
+                                </Wrap>
+                            </Box>
+
+                            <Text color='blue.600'>Stats:</Text>
+                            <Stack spacing="1">
                                 {pokemonDetails.stats.map((stat, index) => (
-                                    <Text key={index}>{stat.stat.name}: {stat.base_stat}</Text>
+                                    <Text key={index}>
+                                        {stat.stat.name.charAt(0).toUpperCase() + stat.stat.name.slice(1)}: {stat.base_stat}
+                                    </Text>
                                 ))}
-                            </Text>
+                            </Stack>
                         </Stack>
-                    </Flex>
+                    </CardBody>
                     <Divider />
-                </Box>
-            </Center>));
+                </Card>
+            </Center>
+
+        ));
 };
 
 export default PokemonDetails;
